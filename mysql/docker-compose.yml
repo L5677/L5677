@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: attendance_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123456}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-attendance_app}
+      MYSQL_USER: ${MYSQL_USER:-attendance}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-attendance123}
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./data:/var/lib/mysql
+    restart: unless-stopped
+
